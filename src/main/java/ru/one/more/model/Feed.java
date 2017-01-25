@@ -14,14 +14,13 @@ import java.util.Date;
 @Entity
 @Table(indexes={@Index(name = "searchIndex", columnList = "title")})
 @BatchSize(size = 10)
-public class NewsArticle {
+public class Feed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @NotNull
     @Size(min = 1, max = 200)
-
     String title;
 
     String shortContent;
@@ -38,8 +37,8 @@ public class NewsArticle {
 
     String sourceLink;
 
-    @OneToMany
-    NewsSource source;
+    @ManyToOne
+    FeedSource source;
 
     public Long getId() {
         return id;
@@ -87,5 +86,21 @@ public class NewsArticle {
 
     public void setLoadDate(Date loadDate) {
         this.loadDate = loadDate;
+    }
+
+    public String getSourceLink() {
+        return sourceLink;
+    }
+
+    public void setSourceLink(String sourceLink) {
+        this.sourceLink = sourceLink;
+    }
+
+    public FeedSource getSource() {
+        return source;
+    }
+
+    public void setSource(FeedSource source) {
+        this.source = source;
     }
 }

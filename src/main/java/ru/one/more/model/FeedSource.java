@@ -8,9 +8,9 @@ import javax.persistence.*;
  * Created by aboba on 23.01.17.
  */
 @Entity
-public class NewsSource {
+public class FeedSource {
 
-    enum SourceType {
+    public enum SourceType {
         RSS
     }
     @Id
