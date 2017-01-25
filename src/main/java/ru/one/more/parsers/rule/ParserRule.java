@@ -1,7 +1,7 @@
 package ru.one.more.parsers.rule;
 
-import ru.one.more.model.ItemRule;
-import ru.one.more.model.SourceRule;
+import ru.one.more.app.entities.ItemRule;
+import ru.one.more.app.entities.SourceRule;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,11 +24,14 @@ public class ParserRule {
     public static final String ITEM_PUB_DATE = "item.pubDate";
     public static final String ITEM_URL = "item.url";
 
+    public static final String RULES_DEFAULT_RSS_RULE = "rules/default.rule";
     private static final Properties defaultProps = new Properties();
+
     static {
         try {
-            defaultProps.load(ParserRule.class.getClassLoader().getResourceAsStream("rules/default.rule"));
+            defaultProps.load(ParserRule.class.getClassLoader().getResourceAsStream(RULES_DEFAULT_RSS_RULE));
         } catch (IOException e) {
+
             e.printStackTrace();
         }
     }

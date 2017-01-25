@@ -1,7 +1,7 @@
 package ru.one.more.parsers.rule;
 
-import ru.one.more.model.Feed;
-import ru.one.more.model.FeedSource;
+import ru.one.more.app.entities.Feed;
+import ru.one.more.app.entities.FeedSource;
 
 import java.util.List;
 

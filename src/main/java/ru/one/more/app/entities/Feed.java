@@ -1,11 +1,9 @@
-package ru.one.more.model;
+package ru.one.more.app.entities;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -19,8 +17,6 @@ public class Feed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @NotNull
-    @Size(min = 1, max = 200)
     String title;
 
     String shortContent;

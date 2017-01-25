@@ -4,8 +4,8 @@ package ru.one.more.parsers;
 import co.unruly.matchers.OptionalMatchers;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
-import ru.one.more.model.Feed;
-import ru.one.more.model.FeedSource;
+import ru.one.more.app.entities.Feed;
+import ru.one.more.app.entities.FeedSource;
 import ru.one.more.parsers.rule.ParserResult;
 import ru.one.more.parsers.rule.ParserRule;
 

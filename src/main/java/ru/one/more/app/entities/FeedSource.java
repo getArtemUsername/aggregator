@@ -1,6 +1,4 @@
-package ru.one.more.model;
-
-import antlr.ASdebug.IASDebugStream;
+package ru.one.more.app.entities;
 
 import javax.persistence.*;
 

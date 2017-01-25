@@ -5,12 +5,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import ru.one.more.model.Feed;
-import ru.one.more.model.FeedSource;
-import ru.one.more.model.ItemRule;
+import ru.one.more.app.entities.Feed;
+import ru.one.more.app.entities.FeedSource;
+import ru.one.more.app.entities.ItemRule;
 import ru.one.more.parsers.rule.ParserResult;
 import ru.one.more.parsers.rule.ParserRule;
-import sun.nio.ch.IOUtil;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,13 +17,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static ru.one.more.model.FeedSource.SourceType.RSS;
+import static ru.one.more.app.entities.FeedSource.SourceType.RSS;
 
 
 /**
@@ -114,6 +112,7 @@ public class RssParser {
     }
 
     private Date parseDate(String propertyValue) {
+        //ToDo
         return new Date();
     }
 

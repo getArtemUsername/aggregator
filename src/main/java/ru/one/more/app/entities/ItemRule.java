@@ -1,4 +1,4 @@
-package ru.one.more.model;
+package ru.one.more.app.entities;
 
 import javax.persistence.Embeddable;
 
