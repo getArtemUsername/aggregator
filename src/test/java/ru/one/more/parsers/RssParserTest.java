@@ -27,7 +27,7 @@ public class RssParserTest {
 
     @Test
     public void shouldGrabRpcFeedSource() throws IOException {
-        InputStream rbcIS = RssParserTest.class.getClassLoader().getResourceAsStream("rbc-rss.xml");
+        InputStream rbcIS = RssParserTest.class.getClassLoader().getResourceAsStream("in/rbc-rss.xml");
         String rbcXml = IOUtils.toString(rbcIS);
         Optional<ParserResult> feedSource = ParserRule.from("rules/rbc.rule")
                 .flatMap(rule -> parser.withRule(rule))
@@ -46,7 +46,7 @@ public class RssParserTest {
 
     @Test
     public void shouldGrabRpcFeeds() throws IOException {
-        InputStream rbcIS = RssParserTest.class.getClassLoader().getResourceAsStream("rbc-rss.xml");
+        InputStream rbcIS = RssParserTest.class.getClassLoader().getResourceAsStream("in/rbc-rss.xml");
         String rbcXml = IOUtils.toString(rbcIS);
         Optional<ParserResult> feedSource = ParserRule.from("rules/rbc.rule")
                 .flatMap(rule -> parser.withRule(rule))
@@ -67,7 +67,7 @@ public class RssParserTest {
 
     @Test
     public void shouldGrabGlunewsFeedSource() throws IOException {
-        InputStream glunewsIS = RssParserTest.class.getClassLoader().getResourceAsStream("glunews-rss.xml");
+        InputStream glunewsIS = RssParserTest.class.getClassLoader().getResourceAsStream("in/glunews-rss.xml");
         String glunewsXml = IOUtils.toString(glunewsIS);
         Optional<ParserResult> feedSource = ParserRule.from("rules/glunews.rule")
                 .flatMap(rule -> parser.withRule(rule))

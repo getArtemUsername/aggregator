@@ -28,6 +28,5 @@ public class ParserRuleTest {
         assertThat(rule.getSourceRule().getItemRule().getItemDescriptionTag(), is("description"));
         assertThat(rule.getSourceRule().getItemRule().getItemPubDateTag(), is("pubDate"));
         assertThat(rule.getSourceRule().getItemRule().getItemUrlTag(), is("link"));
-
     }
 }
