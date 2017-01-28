@@ -40,7 +40,6 @@ public class CRUDModelsIT {
     public void testCreateFeed() throws Exception {
         session.getTransaction().begin();
         FeedSource feedSource = new FeedSource();
-        feedSource.setSourceType(FeedSource.SourceType.RSS);
         feedSource.setTitle("Some Title");
         feedSource.setDescription("Some Description");
         feedSource.setLang("RU");

@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Created by aboba on 23.01.17.
  */
 @Entity
+@Table(name = "rule")
 public class SourceRule {
 
     public enum DataType {

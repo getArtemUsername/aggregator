@@ -20,6 +20,9 @@ public class FeedSource {
 
     String description;
 
+    @ManyToOne
+    SourceRule parseRule;
+
     public Long getId() {
         return id;
     }
@@ -58,5 +61,25 @@ public class FeedSource {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public SourceRule getParseRule() {
+        return parseRule;
+    }
+
+    public void setParseRule(SourceRule parseRule) {
+        this.parseRule = parseRule;
+    }
+
+    @Override
+    public String toString() {
+        return "FeedSource{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", lang='" + lang + '\'' +
+                ", description='" + description + '\'' +
+                ", parseRule=" + parseRule +
+                '}';
     }
 }

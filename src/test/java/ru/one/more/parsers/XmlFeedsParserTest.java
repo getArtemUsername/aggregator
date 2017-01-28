@@ -11,6 +11,7 @@ import ru.one.more.parsers.rule.ParserRule;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +61,7 @@ public class XmlFeedsParserTest {
         assertThat(feed.getTitle(), is("Volkswagen обязали выплатить $1,2 млрд дилерам за «дизельгейт»"));
         assertThat(feed.getShortContent(), isEmptyOrNullString());
         assertThat(feed.getSource(), is(feedSource.get().getFeedSource()));
+        assertThat(new SimpleDateFormat("dd.MM.yyyy").format(feed.getPostDate()), is("24.01.2017"));
         assertThat(feed.getSourceLink(), is("http://www.rbc.ru/rbcfreenews/588704959a7947a05640857c"));
         rbcIS.close();
     }

@@ -14,12 +14,15 @@ import ru.one.more.app.entities.SourceRule;
 import ru.one.more.parsers.rule.ParserResult;
 import ru.one.more.parsers.rule.ParserRule;
 import ru.one.more.parsers.util.XMLFinder;
+import ru.one.more.util.StrUtils;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -33,12 +36,11 @@ import java.util.function.Supplier;
  */
 public class XmlFeedsParser {
 
-
     public Optional<RuledParser> withRule(ParserRule parserRule) {
         return Optional.of(new RuledParser(parserRule));
     }
 
-    class RuledParser {
+    public class RuledParser {
         final ParserRule parserRule;
         RuledParser(ParserRule parserRule) {
             this.parserRule = parserRule;
@@ -69,6 +71,8 @@ public class XmlFeedsParser {
             List<Feed> feeds = itemNodesOpt.map(itemNodes -> fetchFeeds(itemNodes, parserRule, feedSource))
                     .orElse(new ArrayList<>());
 
+            feedSource.setParseRule(parserRule.getSourceRule());
+
             return Optional.of(new ParserResult(feedSource, feeds));
         } catch (DocumentException e) {
             return Optional.empty();
@@ -98,10 +102,14 @@ public class XmlFeedsParser {
 
         ItemRule itemRule = parserRule.getSourceRule().getItemRule();
 
-        List<Supplier<String>> itemRuleTagNames = Arrays.asList(itemRule::getItemTitleTag, itemRule::getItemDescriptionTag,
-                itemRule::getItemPubDateTag, itemRule::getItemUrlTag, itemRule::getItemThumbLinkTag);
+        List<Supplier<String>> itemRuleTagNames = Arrays.asList(
+                itemRule::getItemTitleTag, itemRule::getItemDescriptionTag,
+                itemRule::getItemPubDateTag, itemRule::getItemUrlTag);
+                //itemRule::getItemThumbLinkTag);
         List<BiConsumer<Feed, String>> itemSetters = Arrays
-                .asList(Feed::setTitle, Feed::setShortContent, (f, s)->parseDate(s).ifPresent(f::setPostDate),
+                .asList(Feed::setTitle,
+                        Feed::setShortContent,
+                        (f, s)-> StrUtils.tryToParseDate(s).ifPresent(f::setPostDate),
                         Feed::setSourceLink);
 
         itemNodes.forEach(itemNode -> {
@@ -116,11 +124,6 @@ public class XmlFeedsParser {
         });
 
         return feeds;
-    }
-
-    private Optional<Date> parseDate(String propertyValue) {
-        //ToDo
-        return Optional.of(new Date());
     }
 
 }

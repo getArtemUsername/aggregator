@@ -2,9 +2,7 @@ package ru.one.more.app.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,6 +11,8 @@ import java.util.Date;
 @Entity
 public class LogRecord {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @CreationTimestamp

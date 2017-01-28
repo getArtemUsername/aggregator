@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
 
-import static ru.one.more.parsers.util.StrUtils.isWord;
+import static ru.one.more.util.StrUtils.isWord;
 
 /**
  * Created by aboba on 24.01.17.
