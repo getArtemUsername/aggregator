@@ -1,9 +1,8 @@
 package ru.one.more.parsers.rule;
 
 import co.unruly.matchers.OptionalMatchers;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import ru.one.more.app.entities.SourceRule;
 
 import java.util.Optional;
 
@@ -15,15 +14,17 @@ import static org.junit.Assert.assertThat;
  */
 public class ParserRuleTest {
     @Test
-    public void defaultParserRuleAppliedIfRuleNotExist() {
-        Optional<ParserRule> parserRule  = ParserRule.from("not_existed.rule");
+    public void testRssRuleCreation() {
+        Optional<ParserRule> parserRule  = ParserRule.from("rules/rss.rule");
         assertThat(parserRule, OptionalMatchers.contains(any(ParserRule.class)));
         ParserRule rule = parserRule.get();
-        assertThat(rule.getSourceRule().getChannelTitleTag(), is("title"));
-        assertThat(rule.getSourceRule().getChannelDescriptionTag(), is("description"));
-        assertThat(rule.getSourceRule().getChannelLanguageTag(), is("language"));
-        assertThat(rule.getSourceRule().getChannelItemTag(), is("item"));
-        assertThat(rule.getSourceRule().getChannelUrlTag(), is("link"));
+        assertThat(rule.getSourceRule().getName(), is("RSS"));
+        assertThat(rule.getSourceRule().getDataType(), is(SourceRule.DataType.XML));
+        assertThat(rule.getSourceRule().getTitleTag(), is("title"));
+        assertThat(rule.getSourceRule().getDescriptionTag(), is("description"));
+        assertThat(rule.getSourceRule().getLanguageTag(), is("language"));
+        assertThat(rule.getSourceRule().getItemTag(), is("item"));
+        assertThat(rule.getSourceRule().getUrlTag(), is("link"));
         assertThat(rule.getSourceRule().getItemRule().getItemTitleTag(), is("title"));
         assertThat(rule.getSourceRule().getItemRule().getItemDescriptionTag(), is("description"));
         assertThat(rule.getSourceRule().getItemRule().getItemPubDateTag(), is("pubDate"));

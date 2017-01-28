@@ -8,69 +8,107 @@ import javax.persistence.*;
 @Entity
 public class SourceRule {
 
+    public enum DataType {
+        XML, JSON
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    String name;
 
-    String channelTitleTag;
+    @Enumerated(EnumType.STRING)
+    DataType dataType;
 
-    String channelDescriptionTag;
+    String rootSearchTag;
 
-    String channelLanguageTag;
+    String itemsSearchTag;
 
-    String channelUrlTag;
+    String titleTag;
 
-    String channelItemTag;
+    String descriptionTag;
+
+    String languageTag;
+
+    String urlTag;
+
+    String itemTag;
 
     @Embedded
     ItemRule itemRule;
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getChannelTitleTag() {
-        return channelTitleTag;
+    public DataType getDataType() {
+        return dataType;
     }
 
-    public void setChannelTitleTag(String channelTitleTag) {
-        this.channelTitleTag = channelTitleTag;
+    public void setDataType(DataType dataType) {
+        this.dataType = dataType;
     }
 
-    public String getChannelDescriptionTag() {
-        return channelDescriptionTag;
+    public void setDataType(String dataType) {
+        this.dataType = DataType.valueOf(dataType.toUpperCase());
     }
 
-    public void setChannelDescriptionTag(String channelDescriptionTag) {
-        this.channelDescriptionTag = channelDescriptionTag;
+    public String getRootSearchTag() {
+        return rootSearchTag;
     }
 
-    public String getChannelLanguageTag() {
-        return channelLanguageTag;
+    public void setRootSearchTag(String rootSearchTag) {
+        this.rootSearchTag = rootSearchTag;
     }
 
-    public void setChannelLanguageTag(String channelLanguageTag) {
-        this.channelLanguageTag = channelLanguageTag;
+    public String getItemsSearchTag() {
+        return itemsSearchTag;
     }
 
-    public String getChannelUrlTag() {
-        return channelUrlTag;
+    public void setItemsSearchTag(String itemsSearchTag) {
+        this.itemsSearchTag = itemsSearchTag;
     }
 
-    public void setChannelUrlTag(String channelUrlTag) {
-        this.channelUrlTag = channelUrlTag;
+    public String getTitleTag() {
+        return titleTag;
     }
 
-    public String getChannelItemTag() {
-        return channelItemTag;
+    public void setTitleTag(String channelTitleTag) {
+        this.titleTag = channelTitleTag;
     }
 
-    public void setChannelItemTag(String channelItemTag) {
-        this.channelItemTag = channelItemTag;
+    public String getDescriptionTag() {
+        return descriptionTag;
+    }
+
+    public void setDescriptionTag(String channelDescriptionTag) {
+        this.descriptionTag = channelDescriptionTag;
+    }
+
+    public String getLanguageTag() {
+        return languageTag;
+    }
+
+    public void setLanguageTag(String channelLanguageTag) {
+        this.languageTag = channelLanguageTag;
+    }
+
+    public String getUrlTag() {
+        return urlTag;
+    }
+
+    public void setUrlTag(String channelUrlTag) {
+        this.urlTag = channelUrlTag;
+    }
+
+    public String getItemTag() {
+        return itemTag;
+    }
+
+    public void setItemTag(String channelItemTag) {
+        this.itemTag = channelItemTag;
     }
 
     public ItemRule getItemRule() {

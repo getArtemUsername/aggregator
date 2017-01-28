@@ -1,0 +1,14 @@
+type=XML
+name=RSS
+
+root.search.tag=channel
+item.search.tag=.
+title.tag=title
+desc.tag=description
+lang.tag=language
+url.tag=link
+item.tag=item
+item.title.tag=title
+item.desc.tag=description
+item.pubDate.tag=pubDate
+item.url.tag=link

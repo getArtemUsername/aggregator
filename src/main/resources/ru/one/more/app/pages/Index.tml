@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Aggregator</title>
+    </head>
+    <body>
+        <ul t:type="loop" source="values" value="var:value"></ul>
+    </body>
+</html>

@@ -8,9 +8,6 @@ import javax.persistence.*;
 @Entity
 public class FeedSource {
 
-    public enum SourceType {
-        RSS
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -22,9 +19,6 @@ public class FeedSource {
     String lang;
 
     String description;
-
-    @Enumerated(EnumType.STRING)
-    SourceType sourceType;
 
     public Long getId() {
         return id;
@@ -64,13 +58,5 @@ public class FeedSource {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public SourceType getSourceType() {
-        return sourceType;
-    }
-
-    public void setSourceType(SourceType sourceType) {
-        this.sourceType = sourceType;
     }
 }
