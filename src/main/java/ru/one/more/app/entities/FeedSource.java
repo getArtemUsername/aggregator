@@ -11,7 +11,7 @@ public class FeedSource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
+    @Column(nullable = false)
     String title;
 
     String url;

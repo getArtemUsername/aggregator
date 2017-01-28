@@ -91,7 +91,7 @@ public class ParserRule {
     }
 
     public static class RuleException extends Exception {
-        RuleException(String message) {
+        public RuleException(String message) {
             super(message);
         }
     }

@@ -17,6 +17,7 @@ public class Feed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(nullable = false)
     String title;
 
     String shortContent;
@@ -25,12 +26,14 @@ public class Feed {
     String fullContent;
 
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     Date postDate;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     Date loadDate;
 
+    @Column(nullable = false)
     String sourceLink;
 
     @ManyToOne
@@ -98,5 +101,19 @@ public class Feed {
 
     public void setSource(FeedSource source) {
         this.source = source;
+    }
+
+    @Override
+    public String toString() {
+        return "Feed{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", shortContent='" + shortContent + '\'' +
+                ", fullContent='" + fullContent + '\'' +
+                ", postDate=" + postDate +
+                ", loadDate=" + loadDate +
+                ", sourceLink='" + sourceLink + '\'' +
+                ", source=" + source +
+                '}';
     }
 }

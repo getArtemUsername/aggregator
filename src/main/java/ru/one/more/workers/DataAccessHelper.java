@@ -74,7 +74,7 @@ public class DataAccessHelper {
             queryString += " where lower(title) like \'%:searchStr%\'";
             useSearch = true;
         }
-
+        queryString += " order by f.postDate";
         Query<Feed> query = s.createQuery(queryString, Feed.class);
         if (useSearch) query.setParameter("searchStr", searchString.trim().toLowerCase());
 

@@ -17,6 +17,10 @@ public class StrUtils {
         return s != null && !s.trim().isEmpty();
     }
 
+    public static boolean isNotWord(String s) {
+        return !isWord(s);
+    }
+
     public static String getStackTraceText(Throwable e) {
         StackTraceElement[] trace = e.getStackTrace();
         StringBuilder b = new StringBuilder();
@@ -26,17 +30,5 @@ public class StrUtils {
         return b.toString();
     }
 
-    public static Optional<Date> tryToParseDate(String str) {
-        SimpleDateFormat sdf1 = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
-        SimpleDateFormat sdf2 = new SimpleDateFormat("d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
-        try {
-            return Optional.of(sdf1.parse(str));
-        } catch (ParseException ignore) {
-            try {
-                return Optional.of(sdf2.parse(str));
-            } catch (ParseException e) {
-                return Optional.empty();
-            }
-        }
-    }
+
 }
