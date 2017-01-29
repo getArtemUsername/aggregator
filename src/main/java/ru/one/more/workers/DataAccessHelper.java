@@ -18,17 +18,17 @@ import java.util.List;
  */
 public class DataAccessHelper {
     private static final int PAGE_SIZE = 10;
-    private static DataAccessHelper ourInstance = new DataAccessHelper();
-
-    public static DataAccessHelper getInstance() {
-        return ourInstance;
-    }
-
     SessionFactory sessionFactory;
     Session session;
+
+    private final static DataAccessHelper inst = new DataAccessHelper();
+
+    public static DataAccessHelper getInst() {
+        return inst;
+    }
+
     private DataAccessHelper() {
         sessionFactory = new Configuration().configure().buildSessionFactory();
-
     }
 
     Session getSession() {
@@ -63,24 +63,25 @@ public class DataAccessHelper {
         closeSession();
     }
 
-    public List<Feed> fetchFeeds(int page) {
-        return fetchFeeds(null, page);
-    }
     public List<Feed> fetchFeeds(String searchString, int page) {
         Session s = getSession();
         String queryString = "select f from Feed f";
         boolean useSearch = false;
         if (searchString != null && !searchString.isEmpty()) {
-            queryString += " where lower(title) like \'%:searchStr%\'";
+            queryString += " where lower(title) like :searchStr";
             useSearch = true;
         }
         queryString += " order by f.postDate";
         Query<Feed> query = s.createQuery(queryString, Feed.class);
-        if (useSearch) query.setParameter("searchStr", searchString.trim().toLowerCase());
+        if (useSearch) query.setParameter("searchStr", "%"+searchString.trim().toLowerCase()+"%");
 
         int start = page * PAGE_SIZE;
         int count = start + PAGE_SIZE;
         return query.setFirstResult(start).setMaxResults(count).getResultList();
+    }
+
+    public boolean noMoreFeeds(String searchString, Integer page) {
+        return fetchFeeds(searchString, ++page).size() == 0;
     }
 
     public static class SaveResultException extends Exception {

@@ -34,7 +34,7 @@ public class Feed {
     Date loadDate;
 
     @Column(nullable = false)
-    String sourceLink;
+    String link;
 
     @ManyToOne
     FeedSource source;
@@ -87,12 +87,12 @@ public class Feed {
         this.loadDate = loadDate;
     }
 
-    public String getSourceLink() {
-        return sourceLink;
+    public String getLink() {
+        return link;
     }
 
-    public void setSourceLink(String sourceLink) {
-        this.sourceLink = sourceLink;
+    public void setLink(String sourceLink) {
+        this.link = sourceLink;
     }
 
     public FeedSource getSource() {
@@ -112,7 +112,7 @@ public class Feed {
                 ", fullContent='" + fullContent + '\'' +
                 ", postDate=" + postDate +
                 ", loadDate=" + loadDate +
-                ", sourceLink='" + sourceLink + '\'' +
+                ", sourceLink='" + link + '\'' +
                 ", source=" + source +
                 '}';
     }

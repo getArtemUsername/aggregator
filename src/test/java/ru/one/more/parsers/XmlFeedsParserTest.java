@@ -40,7 +40,7 @@ public class XmlFeedsParserTest {
         assertThat(f.getTitle(), is("РБК - Все материалы"));
         assertThat(f.getDescription(), is("rss.rbc.ru"));
         assertThat(f.getLang(), isEmptyOrNullString());
-        assertThat(f.getUrl(), is("http://www.rbc.ru/"));
+        assertThat(f.getLink(), is("http://www.rbc.ru/"));
         rbcIS.close();
     }
 
@@ -62,7 +62,7 @@ public class XmlFeedsParserTest {
         assertThat(feed.getShortContent(), isEmptyOrNullString());
         assertThat(feed.getSource(), is(feedSource.get().getFeedSource()));
         assertThat(new SimpleDateFormat("dd.MM.yyyy").format(feed.getPostDate()), is("24.01.2017"));
-        assertThat(feed.getSourceLink(), is("http://www.rbc.ru/rbcfreenews/588704959a7947a05640857c"));
+        assertThat(feed.getLink(), is("http://www.rbc.ru/rbcfreenews/588704959a7947a05640857c"));
         rbcIS.close();
     }
 
@@ -80,7 +80,7 @@ public class XmlFeedsParserTest {
         assertThat(f.getTitle(), is("GLUnews.ru / Интересные и Забавные Новости"));
         assertThat(f.getDescription(), is("GLUnews.ru / Интересные и Забавные Новости"));
         assertThat(f.getLang(), is("ru-ru"));
-        assertThat(f.getUrl(), is("http://www.glunews.ru"));
+        assertThat(f.getLink(), is("http://www.glunews.ru"));
         glunewsIS.close();
     }
 }

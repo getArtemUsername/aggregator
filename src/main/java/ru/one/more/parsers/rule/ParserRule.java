@@ -73,14 +73,14 @@ public class ParserRule {
         sourceRule.setTitleTag(p.getProperty(SRC_TITLE));
         sourceRule.setDescriptionTag(p.getProperty(SRC_DESC));
         sourceRule.setLanguageTag(p.getProperty(SRC_LANG));
-        sourceRule.setUrlTag(p.getProperty(SRC_URL));
+        sourceRule.setLinkTag(p.getProperty(SRC_URL));
         sourceRule.setItemTag(p.getProperty(SRC_ITEM));
 
         ItemRule itemRule = new ItemRule();
         itemRule.setItemTitleTag(p.getProperty(ITEM_TITLE));
         itemRule.setItemDescriptionTag(p.getProperty(ITEM_DESC));
         itemRule.setItemPubDateTag(p.getProperty(ITEM_PUB_DATE));
-        itemRule.setItemUrlTag(p.getProperty(ITEM_URL));
+        itemRule.setItemLinkTag(p.getProperty(ITEM_URL));
 
         sourceRule.setItemRule(itemRule);
         return sourceRule;

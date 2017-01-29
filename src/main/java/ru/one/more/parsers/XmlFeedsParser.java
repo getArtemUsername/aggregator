@@ -86,9 +86,9 @@ public class XmlFeedsParser {
         FeedSource feedSource = new FeedSource();
         SourceRule sourceRule = parserRule.getSourceRule();
         List<Supplier<String>> ruleTagNames = Arrays.asList(sourceRule::getTitleTag, sourceRule::getDescriptionTag,
-                sourceRule::getLanguageTag, sourceRule::getUrlTag);
+                sourceRule::getLanguageTag, sourceRule::getLinkTag);
         List<Consumer<String>> ruleSetters = Arrays.asList(feedSource::setTitle,  feedSource::setDescription,
-                feedSource::setLang, feedSource::setUrl);
+                feedSource::setLang, feedSource::setLink);
         int i = 0;
         for (Consumer<String> ruleSetter : ruleSetters) {
             String query = "//" + parserRule.getSourceRule().getRootSearchTag() +
@@ -107,13 +107,13 @@ public class XmlFeedsParser {
 
         List<Supplier<String>> itemRuleTagNames = Arrays.asList(
                 itemRule::getItemTitleTag, itemRule::getItemDescriptionTag,
-                itemRule::getItemPubDateTag, itemRule::getItemUrlTag);
+                itemRule::getItemPubDateTag, itemRule::getItemLinkTag);
 
         List<BiConsumer<Feed, String>> itemSetters = Arrays
                 .asList(Feed::setTitle,
                         Feed::setShortContent,
                         (f, s)-> DateUtils.tryToParseDate(feedSource.getTitle(), s).ifPresent(f::setPostDate),
-                        Feed::setSourceLink);
+                        Feed::setLink);
 
         for (Node itemNode : itemNodes) {
             Feed feed = new Feed();
@@ -134,7 +134,7 @@ public class XmlFeedsParser {
                         + "\ninsert new format to df.rules");
                 houstonWeHaveAProblem = true;
             }
-            if (isNotWord(feed.getSourceLink())) {
+            if (isNotWord(feed.getLink())) {
                 logger.warn("Feed "+ feed + ". feed url is mandatory");
                 houstonWeHaveAProblem = true;
             }

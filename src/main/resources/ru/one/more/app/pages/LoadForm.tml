@@ -1,0 +1,23 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
+<head></head>
+<body>
+    <div class="container">
+        <form t:type="form" clientValidation="none" t:id="loadFeedForm">
+            <t:errors/>
+            <div>
+                <label t:type="label" for="ruleFile"/>
+                <input t:type="upload" t:id="ruleFile" validate="required"/>
+            </div>
+            <div>
+                <label t:type="label" for="feedsLink"/>
+                <input t:type="textfield" t:id="feedsLink" validate="required"/>
+            </div>
+
+            <div>
+                <input type="submit" value="Добавить"/>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>

@@ -1,9 +1,42 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Aggregator</title>
-    </head>
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
+<head>
+    <title>Aggregator</title>
+</head>
     <body>
-        <ul t:type="loop" source="values" value="var:value"></ul>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a t:type="pagelink" page="index" class="navbar-brand">ONE MORE AGGREGATOR</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a t:type="pagelink" page="loadform">Добавить источник</a></li>
+                        <li><a t:type="eventlink" event="refreshFeeds">Обновить ленту</a></li>
+                    </ul>
+                    <form t:type="form" t:id="searchForm" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input t:type="textfield" class="form-control" value="searchString" placeholder="Поиск по заголовку"/>
+                        </div>
+                        <input type="submit" class="btn btn-default" value="Поиск"/>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">content...</div>
+            <nav aria-label="...">
+                <ul class="pager">
+                    <t:if test="isNotFeedsStart">
+                        <li class="previous"><a t:type="eventlink" event="prev"><span aria-hidden="true">&larr;</span>Назад</a></li>
+                    </t:if>
+                    <t:if test="isNotFeedsEnd">
+                        <li class="next"><a t:type="eventlink" event="next">Вперед<span aria-hidden="true">&rarr;</span></a></li>
+                    </t:if>
+                </ul>
+            </nav>
+        </div>
+
     </body>
 </html>

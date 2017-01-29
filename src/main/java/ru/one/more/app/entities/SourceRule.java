@@ -29,7 +29,7 @@ public class SourceRule {
 
     String languageTag;
 
-    String urlTag;
+    String linkTag;
 
     String itemTag;
 
@@ -96,12 +96,12 @@ public class SourceRule {
         this.languageTag = channelLanguageTag;
     }
 
-    public String getUrlTag() {
-        return urlTag;
+    public String getLinkTag() {
+        return linkTag;
     }
 
-    public void setUrlTag(String channelUrlTag) {
-        this.urlTag = channelUrlTag;
+    public void setLinkTag(String channelUrlTag) {
+        this.linkTag = channelUrlTag;
     }
 
     public String getItemTag() {

@@ -8,6 +8,20 @@
         <param-name>tapestry.app-package</param-name>
         <param-value>ru.one.more.app</param-value>
     </context-param>
+
+    <context-param>
+        <param-name>tapestry.development-modules</param-name>
+        <param-value>
+            ru.one.more.app.services.DevelopmentModule
+        </param-value>
+    </context-param>
+    <context-param>
+        <param-name>tapestry.qa-modules</param-name>
+        <param-value>
+            ru.one.more.app.services.QaModule
+        </param-value>
+    </context-param>
+
     <filter>
         <filter-name>aggregator</filter-name>
         <filter-class>org.apache.tapestry5.TapestryFilter</filter-class>

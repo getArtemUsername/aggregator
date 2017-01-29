@@ -14,7 +14,8 @@ public class FeedSource {
     @Column(nullable = false)
     String title;
 
-    String url;
+    @Column(nullable = false)
+    String link;
 
     String lang;
 
@@ -39,12 +40,12 @@ public class FeedSource {
         this.title = title;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLink() {
+        return link;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setLink(String url) {
+        this.link = url;
     }
 
     public String getLang() {
@@ -76,7 +77,7 @@ public class FeedSource {
         return "FeedSource{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", url='" + url + '\'' +
+                ", url='" + link + '\'' +
                 ", lang='" + lang + '\'' +
                 ", description='" + description + '\'' +
                 ", parseRule=" + parseRule +

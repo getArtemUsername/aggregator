@@ -12,11 +12,11 @@ public class ItemRule {
 
     String itemDescriptionTag;
 
-    String itemUrlTag;
-
-    String itemThumbLinkTag;
+    String itemLinkTag;
 
     String itemPubDateTag;
+
+    String itemThumbLinkTag;
 
     public String getItemTitleTag() {
         return itemTitleTag;
@@ -34,12 +34,12 @@ public class ItemRule {
         this.itemDescriptionTag = itemDescriptionTag;
     }
 
-    public String getItemUrlTag() {
-        return itemUrlTag;
+    public String getItemLinkTag() {
+        return itemLinkTag;
     }
 
-    public void setItemUrlTag(String itemUrlTag) {
-        this.itemUrlTag = itemUrlTag;
+    public void setItemLinkTag(String itemUrlTag) {
+        this.itemLinkTag = itemUrlTag;
     }
 
     public String getItemThumbLinkTag() {

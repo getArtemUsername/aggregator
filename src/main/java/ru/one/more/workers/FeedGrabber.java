@@ -19,14 +19,12 @@ public class FeedGrabber {
 
     Logger logger = LoggerFactory.getLogger(FeedGrabber.class);
 
-    ExecutorService grabbersPool = Executors.newWorkStealingPool(2);
     /*
      * возвращает true - если данные загрузились в бд и можно их доставать для отображения,
      * false - в случае ошибки
      */
 
-    public Future<Boolean> grabFeeds(String url, ParserRule rule) {
-        return grabbersPool.submit(() -> {
+    public boolean grabFeeds(String url, ParserRule rule) {
             FeedsDownloader downloader = new FeedsDownloader(Unirest.get(url));
             Optional<String> feedsStringOpt = downloader.downloadFeeds();
             if (rule.getSourceRule().getDataType() == SourceRule.DataType.XML) {
@@ -38,7 +36,7 @@ public class FeedGrabber {
                 }
                 ParserResult parserResult = result.get();
                 try {
-                    DataAccessHelper.getInstance().saveResult(parserResult, rule);
+                    DataAccessHelper.getInst().saveResult(parserResult, rule);
                 } catch (DataAccessHelper.SaveResultException e) {
                     logger.error(e.getMessage());
                     logger.error(StrUtils.getStackTraceText(e));
@@ -50,6 +48,5 @@ public class FeedGrabber {
                 //ToDo
             }
             return false;
-        });
     }
 }

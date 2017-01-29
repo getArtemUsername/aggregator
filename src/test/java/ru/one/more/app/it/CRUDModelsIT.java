@@ -1,6 +1,5 @@
 package ru.one.more.app.it;
 
-import org.hamcrest.Matchers;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,7 +8,6 @@ import org.junit.*;
 import ru.one.more.app.entities.Feed;
 import ru.one.more.app.entities.FeedSource;
 
-import java.net.URL;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class CRUDModelsIT {
         feedSource.setTitle("Some Title");
         feedSource.setDescription("Some Description");
         feedSource.setLang("RU");
-        feedSource.setUrl("some url");
+        feedSource.setLink("some url");
         Feed feed1 = new Feed();
         feed1.setSource(feedSource);
         feed1.setTitle("Feed 1");

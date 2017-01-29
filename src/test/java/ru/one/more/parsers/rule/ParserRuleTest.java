@@ -24,10 +24,10 @@ public class ParserRuleTest {
         assertThat(rule.getSourceRule().getDescriptionTag(), is("description"));
         assertThat(rule.getSourceRule().getLanguageTag(), is("language"));
         assertThat(rule.getSourceRule().getItemTag(), is("item"));
-        assertThat(rule.getSourceRule().getUrlTag(), is("link"));
+        assertThat(rule.getSourceRule().getLinkTag(), is("link"));
         assertThat(rule.getSourceRule().getItemRule().getItemTitleTag(), is("title"));
         assertThat(rule.getSourceRule().getItemRule().getItemDescriptionTag(), is("description"));
         assertThat(rule.getSourceRule().getItemRule().getItemPubDateTag(), is("pubDate"));
-        assertThat(rule.getSourceRule().getItemRule().getItemUrlTag(), is("link"));
+        assertThat(rule.getSourceRule().getItemRule().getItemLinkTag(), is("link"));
     }
 }
