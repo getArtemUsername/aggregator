@@ -63,6 +63,10 @@ public class LoadForm {
     @SessionState(create = false)
     Map<String, SourceRule> rulesMap;
 
+    @PageReset
+    void reset() {
+        isCustom = true;
+    }
     void onActivate() {
         rules = rulesService.fetchRules();
         if (rulesMap == null) {

@@ -106,6 +106,28 @@ public class Feed {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Feed feed = (Feed) o;
+
+        if (id != null ? !id.equals(feed.id) : feed.id != null) return false;
+        if (!title.equals(feed.title)) return false;
+        if (!postDate.equals(feed.postDate)) return false;
+        return source.equals(feed.source);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + title.hashCode();
+        result = 31 * result + postDate.hashCode();
+        result = 31 * result + source.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Feed{" +
                 "id=" + id +

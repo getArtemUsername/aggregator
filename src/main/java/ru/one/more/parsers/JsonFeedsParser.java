@@ -1,6 +1,8 @@
 package ru.one.more.parsers;
 
 import com.google.gson.*;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,14 +48,10 @@ public class JsonFeedsParser {
     }
 
     private Optional<ParserResult> parseToResult(ParserRule parserRule, InputStream is) {
-        Gson gson = new GsonBuilder().registerTypeAdapter(SourceRule.class, SOURCE_RULE_ADAPTER).create();
+        DocumentContext jsonDoc = JsonPath.parse(is);
+        //jsonDoc.read();
         return Optional.empty();
     }
 
-    public static final JsonDeserializer<SourceRule> SOURCE_RULE_ADAPTER = new JsonDeserializer<SourceRule>() {
-        @Override
-        public SourceRule deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            return null;
-        }
-    };
+
 }

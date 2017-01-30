@@ -73,6 +73,28 @@ public class FeedSource {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FeedSource that = (FeedSource) o;
+
+        if (!title.equals(that.title)) return false;
+        if (link != null ? !link.equals(that.link) : that.link != null) return false;
+        if (!sourceLink.equals(that.sourceLink)) return false;
+        return parseRule.equals(that.parseRule);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + (link != null ? link.hashCode() : 0);
+        result = 31 * result + sourceLink.hashCode();
+        result = 31 * result + parseRule.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "FeedSource{" +
                 ", title='" + title + '\'' +

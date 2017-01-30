@@ -72,7 +72,7 @@ public class Index {
     }
 
     public String dateToString(Date d) {
-        return new SimpleDateFormat("dd.MM.yyyy").format(d);
+        return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(d);
     }
 
     public void onPrev() {

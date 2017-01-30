@@ -24,7 +24,6 @@ import static java.util.stream.Collectors.toList;
 public class DataAccessHelper {
     private static final int PAGE_SIZE = 9;
     SessionFactory sessionFactory;
-    Session session;
 
     private final static DataAccessHelper inst = new DataAccessHelper();
 
@@ -37,16 +36,7 @@ public class DataAccessHelper {
     }
 
     Session getSession() {
-        if (session == null || !session.isOpen())
-            session = sessionFactory.openSession();
-        else
-            System.out.println("session already opened");
-        return session;
-    }
-
-    void closeSession() {
-        if (session != null && session.isOpen())
-            session.close();
+            return sessionFactory.openSession();
     }
 
     public void saveResult(ParserResult parserResult,
@@ -57,7 +47,8 @@ public class DataAccessHelper {
         Transaction transaction = s.getTransaction();
         try {
             transaction.begin();
-            s.saveOrUpdate(rule.getSourceRule());
+            SourceRule sr = s.get(SourceRule.class, rule.getSourceRule().getName());
+            s.saveOrUpdate(sr == null ? rule.getSourceRule() : sr);
             s.saveOrUpdate(feedSource);
             List<Feed> feedListToSave = filterFeedList(s, feedSource.getTitle(), feedList);
             feedListToSave.forEach(s::save);
@@ -66,7 +57,7 @@ public class DataAccessHelper {
             transaction.rollback();
             throw new SaveResultException(e);
         }
-        closeSession();
+        s.close();
     }
 
     public List<FeedSource> fetchFeedSources() {
@@ -75,7 +66,7 @@ public class DataAccessHelper {
                 "select fs " +
                 "from FeedSource fs", FeedSource.class)
                 .getResultList();
-        closeSession();
+        s.close();
         return feedSources;
 
     }
@@ -125,7 +116,7 @@ public class DataAccessHelper {
                         "order by name",
                 SourceRule.class)
                 .getResultList();
-        closeSession();
+        s.close();
         return rules;
     }
 
