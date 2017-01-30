@@ -46,12 +46,14 @@ public class CRUDModelsIT {
         feed1.setSource(feedSource);
         feed1.setTitle("Feed 1");
         feed1.setPostDate(new Date());
+        feed1.setLink("test link 1");
         feed1.setShortContent(".....");
         Feed feed2 = new Feed();
-        feed1.setSource(feedSource);
-        feed1.setTitle("Feed 2");
-        feed1.setPostDate(new Date());
-        feed1.setShortContent(".....");
+        feed2.setSource(feedSource);
+        feed2.setTitle("Feed 2");
+        feed2.setPostDate(new Date());
+        feed2.setLink("test link 2");
+        feed2.setShortContent(".....");
         session.persist(feedSource);
         session.persist(feed1);
         session.persist(feed2);

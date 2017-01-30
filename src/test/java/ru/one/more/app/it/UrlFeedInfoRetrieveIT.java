@@ -14,6 +14,7 @@ import ru.one.more.parsers.XmlFeedsParser;
 import ru.one.more.parsers.rule.ParserResult;
 import ru.one.more.parsers.rule.ParserRule;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,11 @@ public class UrlFeedInfoRetrieveIT {
     Logger logger = LoggerFactory.getLogger(UrlFeedInfoRetrieveIT.class);
     @Test
     public void fetchRssXml() throws UnirestException {
+        URL ruleFile = UrlFeedInfoRetrieveIT.class.getClassLoader().getResource("rules/rss.rule");
         HttpResponse<String> response  = Unirest.get("http://static.feed.rbc.ru/rbc/logical/footer/news.rss")
                 .asString();
         XmlFeedsParser parser = new XmlFeedsParser();
-        Optional<ParserResult> result = ParserRule.from("rules/rss.rule")
+        Optional<ParserResult> result = ParserRule.from(ruleFile.getPath())
                 .flatMap(parser::withRule)
                 .flatMap(p -> p.parse(response.getBody()));
         logger.info(response.getBody().substring(0, 100));

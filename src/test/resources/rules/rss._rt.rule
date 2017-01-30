@@ -1,0 +1,15 @@
+type=XML
+name=RSS RT
+
+root.search.tag=channel
+items.search.tag=.
+
+title.tag=title
+desc.tag=description
+lang.tag=language
+url.tag=atom:link@href
+item.tag=item
+item.title.tag=title
+item.desc.tag=description
+item.pubDate.tag=pubDate
+item.url.tag=guid

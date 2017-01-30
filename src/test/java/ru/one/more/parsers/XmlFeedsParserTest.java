@@ -71,7 +71,7 @@ public class XmlFeedsParserTest {
     public void shouldGrabGlunewsFeedSource() throws IOException {
         InputStream glunewsIS = XmlFeedsParserTest.class.getClassLoader().getResourceAsStream("in/rus-today-rss.xml");
         String glunewsXml = IOUtils.toString(glunewsIS);
-        URL ruleUrl = XmlFeedsParserTest.class.getClassLoader().getResource("rules/rss.rule");
+        URL ruleUrl = XmlFeedsParserTest.class.getClassLoader().getResource("rules/rss._rt.rule");
         Optional<ParserResult> feedSource = ParserRule.from(ruleUrl.getFile())
                 .flatMap(rule -> parser.withRule(rule))
                 .flatMap(p -> p.parse(glunewsXml));
@@ -79,10 +79,10 @@ public class XmlFeedsParserTest {
         assertThat(feedSource, OptionalMatchers.contains(anything()));
 
         FeedSource f = feedSource.get().getFeedSource();
-        assertThat(f.getTitle(), is("GLUnews.ru / Интересные и Забавные Новости"));
-        assertThat(f.getDescription(), is("GLUnews.ru / Интересные и Забавные Новости"));
-        assertThat(f.getLang(), is("ru-ru"));
-        assertThat(f.getLink(), is("http://www.glunews.ru"));
+        assertThat(f.getTitle(), is("RT на русском"));
+        assertThat(f.getDescription(), is("Новости RT на русском языке"));
+        assertThat(f.getLang(), is("ru"));
+        assertThat(f.getLink(), is("https://russian.rt.com/rss"));
         glunewsIS.close();
     }
 }
