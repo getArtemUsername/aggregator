@@ -24,6 +24,7 @@ import static ru.one.more.util.StrUtils.isNotWord;
 /**
  * Created by aboba on 28.01.17.
  */
+//ToDo
 public class JsonFeedsParser {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());

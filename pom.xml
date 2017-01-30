@@ -241,14 +241,14 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.plugin.version}</version>
                 <configuration>
-                    <scanIntervalSeconds>5</scanIntervalSeconds>
+ <!--                   <scanIntervalSeconds>5</scanIntervalSeconds>
                     <reload>manual</reload>
                     <systemProperties>
                         <systemProperty>
                             <name>tapestry.execution-mode</name>
                             <value>development</value>
                         </systemProperty>
-                    </systemProperties>
+                    </systemProperties>-->
                 </configuration>
             </plugin>
             <plugin>
