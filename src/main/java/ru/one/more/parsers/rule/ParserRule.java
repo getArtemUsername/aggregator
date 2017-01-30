@@ -44,7 +44,9 @@ public class ParserRule {
     private ParserRule(SourceRule sourceRule) {
         this.sourceRule = sourceRule;
     }
+
     public SourceRule getSourceRule() { return sourceRule; }
+
 
     public static ParserRule from(SourceRule rule) {
         return new ParserRule(rule);

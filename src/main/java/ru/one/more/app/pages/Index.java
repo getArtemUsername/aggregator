@@ -21,6 +21,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class Index {
 
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
     private List<Feed> feedList;
 
     @Property
@@ -78,7 +79,7 @@ public class Index {
     }
 
     public String dateToString(Date d) {
-        return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(d);
+        return DATE_FORMAT.format(d);
     }
 
     public void onPrev() {
