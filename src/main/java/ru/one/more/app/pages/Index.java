@@ -9,14 +9,18 @@ import ru.one.more.app.services.RefreshService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by aboba on 26.01.17.
  */
 public class Index {
-    @Property
+
     private List<Feed> feedList;
 
     @Property
@@ -39,7 +43,6 @@ public class Index {
     @Inject
     private RefreshService refreshService;
 
-
     public boolean getIsNotFeedsEnd() {
         return page > 0;
     }
@@ -48,10 +51,13 @@ public class Index {
         return !feedsService.noMoreFeeds(searchString, page);
     }
 
+    public void onGoHome() {
+        reset();
+    }
+
     public void onRefreshFeeds() {
         if (refreshService.refreshFeeds()) {
-            page = 0;
-            searchString = "";
+            reset();
             feedList = feedsService.getFeeds(0);
         }
     }
@@ -97,7 +103,7 @@ public class Index {
     @PageReset
     private void reset() {
         page = 0;
-        this.searchString = "";
+        searchString = "";
     }
 
 }

@@ -7,7 +7,7 @@
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a t:type="pagelink" page="index" class="navbar-brand">ONE MORE AGGREGATOR</a>
+                    <a t:type="eventlink" event="goHome" class="navbar-brand">ONE MORE AGGREGATOR</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
