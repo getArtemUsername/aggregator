@@ -1,17 +1,15 @@
 package ru.one.more.app.services.impl;
 
-import org.apache.tapestry5.ioc.annotations.Inject;
 import ru.one.more.app.entities.Feed;
-import ru.one.more.app.services.ReadFeedsService;
+import ru.one.more.app.services.FeedsService;
 import ru.one.more.workers.DataAccessHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by aboba on 29.01.17.
  */
-public class ReadFeedsServiceImpl implements ReadFeedsService {
+public class FeedsServiceImpl implements FeedsService {
 
     @Override
     public List<Feed> getFeeds(int page) {

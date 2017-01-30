@@ -1,0 +1,14 @@
+type=XML
+name=Atom
+
+root.search.tag=feed
+items.search.tag=.
+
+title.tag=title
+desc.tag=subtitle
+url.tag=link@href
+item.tag=entry
+item.title.tag=title
+item.desc.tag=summary
+item.pubDate.tag=updated
+item.url.tag=link@href

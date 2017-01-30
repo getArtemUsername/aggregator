@@ -25,7 +25,7 @@ public class Feed {
     @Lob @Basic(fetch = FetchType.LAZY)
     String fullContent;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     Date postDate;
 
@@ -60,7 +60,9 @@ public class Feed {
     }
 
     public void setShortContent(String shortContent) {
-        this.shortContent = shortContent;
+        this.shortContent = shortContent != null && shortContent.length()>100
+                ? shortContent.substring(0, 100)
+                : shortContent;
     }
 
     public String getFullContent() {

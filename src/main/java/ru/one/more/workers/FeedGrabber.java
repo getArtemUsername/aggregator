@@ -35,6 +35,7 @@ public class FeedGrabber {
                     return false;
                 }
                 ParserResult parserResult = result.get();
+                parserResult.getFeedSource().setSourceLink(url);
                 try {
                     DataAccessHelper.getInst().saveResult(parserResult, rule);
                 } catch (DataAccessHelper.SaveResultException e) {

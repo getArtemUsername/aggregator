@@ -60,7 +60,7 @@ public class CRUDModelsIT {
         assertThat(feeds, hasSize(2));
         assertThat(feeds.get(0).getId(), notNullValue());
         assertThat(feeds.get(1).getId(), notNullValue());
-        assertThat(feeds.get(0).getSource().getId(), notNullValue());
+        assertThat(feeds.get(0).getSource().getTitle(), notNullValue());
     }
 
     @AfterClass

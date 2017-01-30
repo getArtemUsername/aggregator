@@ -12,7 +12,16 @@ import java.util.Optional;
 public class XMLFinder {
 
     static public Optional<String> findElementText(Node doc, String xPathQuery) {
-        Node nodeElement = doc.selectSingleNode(xPathQuery);
+        Node nodeElement;
+        if (xPathQuery.contains("@")) {
+            String tag = xPathQuery.split("@")[0];
+            String attr = xPathQuery.split("@")[1];
+            nodeElement = doc.selectSingleNode(tag);
+            nodeElement = nodeElement.selectSingleNode("@"+attr);
+
+        } else {
+            nodeElement = doc.selectSingleNode(xPathQuery);
+        }
         return Optional.ofNullable(nodeElement!=null?nodeElement.getText():null);
     }
 

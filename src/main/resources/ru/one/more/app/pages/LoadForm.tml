@@ -1,23 +1,91 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
-<head></head>
+<head>
+    <title>Добавить новости</title>
+</head>
 <body>
-    <div class="container">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a t:type="pagelink" page="index" class="navbar-brand"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"/> ONE MORE AGGREGATOR</a>
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+    <div class="row">
         <form t:type="form" clientValidation="none" t:id="loadFeedForm">
             <t:errors/>
-            <div>
-                <label t:type="label" for="ruleFile"/>
-                <input t:type="upload" t:id="ruleFile" validate="required"/>
+            <div class="form-group">
+                <label t:type="label" for="ruleName">Правило</label>
+                <select t:type="select" t:id="ruleName" blankOption="never"
+                        value="ruleName" model="ruleNames" zone="rssRule"/>
+                <p class="help-block">Создайте новое или выберите уже существующее</p>
             </div>
-            <div>
-                <label t:type="label" for="feedsLink"/>
-                <input t:type="textfield" t:id="feedsLink" validate="required"/>
+            <t:zone t:id="rssRule" id="rssRule">
+                <t:if test="isCustom">
+                    <div class="form-group">
+                        <label t:type="label" for="ruleFile">Файл с правилом</label>
+                        <input t:type="upload" t:id="ruleFile" validate="required"/>
+                    </div>
+                </t:if>
+            </t:zone>
+            <div class="form-group">
+                <label t:type="label" for="feedsLink">Url источника</label>
+                <input t:type="textfield" class="form-control" t:id="feedsLink" value="url" validate="required"/>
             </div>
 
             <div>
-                <input type="submit" value="Добавить"/>
+                <input type="submit" value="Добавить" class="btn btn-default"/>
             </div>
 
         </form>
     </div>
+    <div class="row">
+        <div class="panel panel-default col-md-6">
+            <div class="panel-heading">
+                <h3 class="panel-title">Шаблон правила для XML-ответов</h3>
+            </div>
+            <div class="panel-body">
+                <p><samp>type=XML</samp></p>
+                <p><samp>name=уникальное имя правила</samp></p>
+
+                <p><samp>root.search.tag=xml-тэг внутри которого будет поиск</samp></p>
+                <p><samp>items.search.tag=тэг где будет поиск item тэгов,</samp></p>
+                <p><samp>. или пустое значение - совпадает с root.search.tag</samp></p>
+                <p><samp>title.tag=тэг заголовка источника новостей</samp></p>
+                <p><samp>desc.tag=тэг описания источника</samp></p>
+                <p><samp>lang.tag=язык</samp></p>
+                <p><samp>url.tag=ссылка на источник</samp></p>
+                <p><samp>item.tag=тэг новости</samp></p>
+                <p><samp>item.title.tag=название новости</samp></p>
+                <p><samp>item.desc.tag=описание новости</samp></p>
+                <p><samp>item.pubDate.tag=дата публикации</samp></p>
+                <p><samp>item.url.tag=ссылка на новость</samp></p>
+            </div>
+        </div>
+        <div class="panel panel-default col-md-6">
+            <div class="panel-heading">
+                <h3 class="panel-title">Пример</h3>
+            </div>
+            <div class="panel-body">
+                <p><samp>type=XML</samp></p>
+                <p><samp>name=RSS</samp></p>
+
+                <p><samp>root.search.tag=channel</samp></p>
+                <p><samp>items.search.tag=.</samp></p>
+
+                <p><samp>title.tag=title</samp></p>
+                <p><samp>desc.tag=description</samp></p>
+                <p><samp>lang.tag=lang</samp></p>
+                <p><samp>url.tag=link</samp></p>
+                <p><samp>item.tag=item</samp></p>
+                <p><samp>item.title.tag=title</samp></p>
+                <p><samp>item.desc.tag=description</samp></p>
+                <p><samp>item.pubDate.tag=pubDate</samp></p>
+                <p><samp>item.url.tag=link</samp></p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
-<head>
-    <title>Aggregator</title>
-</head>
+    <head>
+        <title>Aggregator</title>
+    </head>
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -25,17 +25,35 @@
             </div>
         </nav>
         <div class="container">
-            <div class="row">content...</div>
-            <nav aria-label="...">
-                <ul class="pager">
-                    <t:if test="isNotFeedsStart">
-                        <li class="previous"><a t:type="eventlink" event="prev"><span aria-hidden="true">&larr;</span>Назад</a></li>
-                    </t:if>
-                    <t:if test="isNotFeedsEnd">
-                        <li class="next"><a t:type="eventlink" event="next">Вперед<span aria-hidden="true">&rarr;</span></a></li>
-                    </t:if>
-                </ul>
-            </nav>
+            <div class="row">
+                <t:loop source="0..triplesCount" value="tripleNum">
+                    <div class="row">
+                        <t:loop source="feeds(tripleNum)" value="feed">
+                            <div class="col-md-4">
+                                <h3>${feed.title}</h3>
+                                <t:outputraw value="feed.shortContent"/>
+                                <p class="small text-muted">${dateToString(feed.postDate)}</p>
+                                <p>Источник: ${feed.source.title}</p>
+                                <p><a class="btn btn-default" href="${feed.link}" role="button">Смотреть »</a></p>
+                            </div>
+                        </t:loop>
+                    </div>
+                </t:loop>
+            </div>
+
+            <div class="row">
+                <nav aria-label="...">
+                    <ul class="pager">
+                        <t:if test="isNotFeedsStart">
+                            <li class="previous"><a t:type="eventlink" event="prev"><span aria-hidden="true">&larr;</span>Назад</a></li>
+                        </t:if>
+                        <t:if test="isNotFeedsEnd">
+                            <li class="next"><a t:type="eventlink" event="next">Вперед<span aria-hidden="true">&rarr;</span></a></li>
+                        </t:if>
+                    </ul>
+                </nav>
+            </div>
+
         </div>
 
     </body>

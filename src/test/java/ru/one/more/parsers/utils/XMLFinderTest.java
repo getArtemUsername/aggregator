@@ -1,6 +1,7 @@
 package ru.one.more.parsers.utils;
 
 import co.unruly.matchers.OptionalMatchers;
+import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
@@ -50,6 +51,15 @@ public class XMLFinderTest {
         assertThat(itemTitleNode, notNullValue());
         assertThat(nodes.get(0).selectSingleNode("title").getText(),
                 is("Volkswagen обязали выплатить $1,2 млрд дилерам за «дизельгейт»"));
+    }
+
+    @Test
+    public void testFindAttributeText() throws DocumentException {
+        SAXReader reader = new SAXReader();
+        String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><feed><title>Title</title><author name=\"Test\"/></feed>";
+        d = reader.read(IOUtils.toInputStream(xml));
+        Optional<String> authorName = XMLFinder.findElementText(d, "//author@name");
+        assertThat(authorName, OptionalMatchers.contains("Test"));
     }
 
 }

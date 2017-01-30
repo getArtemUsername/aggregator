@@ -2,15 +2,14 @@ package ru.one.more.app.pages;
 
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.*;
-import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.upload.services.UploadedFile;
 import ru.one.more.app.entities.Feed;
-import ru.one.more.app.services.FeedsDownloadService;
-import ru.one.more.app.services.ReadFeedsService;
+import ru.one.more.app.services.FeedsService;
 import ru.one.more.app.services.RefreshService;
-import ru.one.more.app.services.impl.RefreshServiceImpl;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +20,12 @@ public class Index {
     private List<Feed> feedList;
 
     @Property
+    private Integer tripleNum;
+
+    @Property
+    private Feed feed;
+
+    @Property
     @Persist
     private Integer page;
 
@@ -29,7 +34,7 @@ public class Index {
     private String searchString;
 
     @Inject
-    private ReadFeedsService readFeedsService;
+    private FeedsService feedsService;
 
     @Inject
     private RefreshService refreshService;
@@ -40,13 +45,34 @@ public class Index {
     }
 
     public boolean getIsNotFeedsStart() {
-        return !readFeedsService.noMoreFeeds(searchString, page);
+        return !feedsService.noMoreFeeds(searchString, page);
     }
 
     public void onRefreshFeeds() {
         if (refreshService.refreshFeeds()) {
-            feedList = readFeedsService.getFeeds(0);
+            page = 0;
+            searchString = "";
+            feedList = feedsService.getFeeds(0);
         }
+    }
+
+    public int getTriplesCount() {
+        return feedList != null && feedList.size() > 0
+                ? (feedList.size() / 3) + (feedList.size() % 3) - 1
+                : 0;
+    }
+
+    public List<Feed> feeds(int tripletNum) {
+        List<Feed> res = new ArrayList<>(3);
+        for (int i = 0; i < 3; i++) {
+            int idx =  (tripletNum * 3) + i;
+            if (idx < feedList.size()) res.add(feedList.get(idx));
+        }
+        return res;
+    }
+
+    public String dateToString(Date d) {
+        return new SimpleDateFormat("dd.MM.yyyy").format(d);
     }
 
     public void onPrev() {
@@ -59,15 +85,16 @@ public class Index {
 
     public void onActivate() {
         if (searchString == null || page == null) reset();
-        feedList = readFeedsService.getFeeds(searchString, page);
+        feedList = feedsService.getFeeds(searchString, page);
     }
 
     @OnEvent(value = EventConstants.SUCCESS)
     public void onSearch() {
         page = 0;
-        feedList = readFeedsService.getFeeds(searchString, page);
+        feedList = feedsService.getFeeds(searchString, page);
     }
 
+    @PageReset
     private void reset() {
         page = 0;
         this.searchString = "";

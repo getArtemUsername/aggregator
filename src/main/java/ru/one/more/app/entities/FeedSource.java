@@ -9,8 +9,6 @@ import javax.persistence.*;
 public class FeedSource {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
     @Column(nullable = false)
     String title;
 
@@ -21,16 +19,10 @@ public class FeedSource {
 
     String description;
 
+    String sourceLink;
+
     @ManyToOne
     SourceRule parseRule;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -72,10 +64,17 @@ public class FeedSource {
         this.parseRule = parseRule;
     }
 
+    public String getSourceLink() {
+        return sourceLink;
+    }
+
+    public void setSourceLink(String sourceLink) {
+        this.sourceLink = sourceLink;
+    }
+
     @Override
     public String toString() {
         return "FeedSource{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 ", url='" + link + '\'' +
                 ", lang='" + lang + '\'' +

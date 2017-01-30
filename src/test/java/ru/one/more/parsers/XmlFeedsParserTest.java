@@ -11,6 +11,7 @@ import ru.one.more.parsers.rule.ParserRule;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
@@ -28,9 +29,9 @@ public class XmlFeedsParserTest {
 
     @Test
     public void shouldGrabRpcFeedSource() throws IOException {
-        InputStream rbcIS = XmlFeedsParserTest.class.getClassLoader().getResourceAsStream("in/rbc-rss.xml");
-        String rbcXml = IOUtils.toString(rbcIS);
-        Optional<ParserResult> feedSource = ParserRule.from("rules/rss.rule")
+        InputStream rbcXml = XmlFeedsParserTest.class.getClassLoader().getResourceAsStream("in/rbc-rss.xml");
+        URL ruleUrl = XmlFeedsParserTest.class.getClassLoader().getResource("rules/rss.rule");
+        Optional<ParserResult> feedSource = ParserRule.from(ruleUrl.getFile())
                 .flatMap(rule -> parser.withRule(rule))
                 .flatMap(p -> p.parse(rbcXml));
 
@@ -41,14 +42,14 @@ public class XmlFeedsParserTest {
         assertThat(f.getDescription(), is("rss.rbc.ru"));
         assertThat(f.getLang(), isEmptyOrNullString());
         assertThat(f.getLink(), is("http://www.rbc.ru/"));
-        rbcIS.close();
+        rbcXml.close();
     }
 
     @Test
     public void shouldGrabRpcFeeds() throws IOException {
-        InputStream rbcIS = XmlFeedsParserTest.class.getClassLoader().getResourceAsStream("in/rbc-rss.xml");
-        String rbcXml = IOUtils.toString(rbcIS);
-        Optional<ParserResult> feedSource = ParserRule.from("rules/rss.rule")
+        InputStream rbcXml = XmlFeedsParserTest.class.getClassLoader().getResourceAsStream("in/rbc-rss.xml");
+        URL ruleUrl = XmlFeedsParserTest.class.getClassLoader().getResource("rules/rss.rule");
+        Optional<ParserResult> feedSource = ParserRule.from(ruleUrl.getFile())
                 .flatMap(rule -> parser.withRule(rule))
                 .flatMap(p -> p.parse(rbcXml));
 
@@ -63,14 +64,15 @@ public class XmlFeedsParserTest {
         assertThat(feed.getSource(), is(feedSource.get().getFeedSource()));
         assertThat(new SimpleDateFormat("dd.MM.yyyy").format(feed.getPostDate()), is("24.01.2017"));
         assertThat(feed.getLink(), is("http://www.rbc.ru/rbcfreenews/588704959a7947a05640857c"));
-        rbcIS.close();
+        rbcXml.close();
     }
 
     @Test
     public void shouldGrabGlunewsFeedSource() throws IOException {
-        InputStream glunewsIS = XmlFeedsParserTest.class.getClassLoader().getResourceAsStream("in/glunews-rss.xml");
+        InputStream glunewsIS = XmlFeedsParserTest.class.getClassLoader().getResourceAsStream("in/rus-today-rss.xml");
         String glunewsXml = IOUtils.toString(glunewsIS);
-        Optional<ParserResult> feedSource = ParserRule.from("rules/rss.rule")
+        URL ruleUrl = XmlFeedsParserTest.class.getClassLoader().getResource("rules/rss.rule");
+        Optional<ParserResult> feedSource = ParserRule.from(ruleUrl.getFile())
                 .flatMap(rule -> parser.withRule(rule))
                 .flatMap(p -> p.parse(glunewsXml));
 

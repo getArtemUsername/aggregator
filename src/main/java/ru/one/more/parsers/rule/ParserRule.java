@@ -1,8 +1,12 @@
 package ru.one.more.parsers.rule;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.one.more.app.entities.ItemRule;
 import ru.one.more.app.entities.SourceRule;
+import ru.one.more.util.StrUtils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
@@ -33,23 +37,28 @@ public class ParserRule {
     static final String ITEM_PUB_DATE = "item.pubDate.tag";
     static final String ITEM_URL = "item.url.tag";
 
+    static Logger logger = LoggerFactory.getLogger(ParserRule.class);
 
     final SourceRule sourceRule;
 
     private ParserRule(SourceRule sourceRule) {
         this.sourceRule = sourceRule;
     }
-
     public SourceRule getSourceRule() { return sourceRule; }
 
+    public static ParserRule from(SourceRule rule) {
+        return new ParserRule(rule);
+    }
+
     public static Optional<ParserRule> from(String filePath) {
-        try(InputStream ruleIS = ParserRule.class.getClassLoader().getResourceAsStream(filePath)) {
+        try(InputStream ruleIS = new FileInputStream(filePath)) {
             Properties p = new Properties();
-            if (ruleIS != null) p.load(ruleIS);
+            if (ruleIS == null) throw new IOException("file = "+ filePath + " not found");
+            p.load(ruleIS);
             return Optional.of(new ParserRule(readRule(p)));
         } catch (RuleException | IOException e) {
-            //log
-            e.printStackTrace();
+            logger.error("rule error: " + e.getMessage());
+            logger.error("trace:\n"+ StrUtils.getStackTraceText(e));
         }
         return Optional.empty();
     }
@@ -89,6 +98,8 @@ public class ParserRule {
     private static boolean hasValue(Properties p, String propertyName) {
         return isWord(p.getProperty(propertyName));
     }
+
+
 
     public static class RuleException extends Exception {
         public RuleException(String message) {
